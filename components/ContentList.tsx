@@ -102,6 +102,7 @@ const ContentList: React.FC<IProps> = ({ data }) => {
         renderItem={renderListItem}
         keyExtractor={(item) => item.id}
         initialNumToRender={1}
+        maxToRenderPerBatch={1}
         onViewableItemsChanged={onViewableItemsChanged}
         viewabilityConfig={viewConfigRef.current}
         showsVerticalScrollIndicator={false}
