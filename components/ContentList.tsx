@@ -82,8 +82,8 @@ const ContentList: React.FC<IProps> = ({ data }) => {
   const onViewableItemsChanged = useCallback(({ viewableItems }) => {
     if ((!viewableItems.length && !selectedVideo) || viewableItems[0].index === selectedVideo)
       return;
-    setSelectedVideo(() => viewableItems[0].index);
-    setCommentsList(() => viewableItems[0].item.comments);
+    setSelectedVideo(viewableItems[0].index);
+    setCommentsList(viewableItems[0].item.comments);
   }, []);
 
   const onCommentsHide = () => {
