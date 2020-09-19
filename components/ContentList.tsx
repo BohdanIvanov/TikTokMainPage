@@ -82,8 +82,8 @@ const ContentList: React.FC<IProps> = ({ data }) => {
   const onViewableItemsChanged = useCallback(({ viewableItems }) => {
     if ((!viewableItems.length && !selectedVideo) || viewableItems[0].index === selectedVideo)
       return;
-    setCommentsList(viewableItems[0].item.comments);
-    setSelectedVideo(viewableItems[0].index);
+    setSelectedVideo(() => viewableItems[0].index);
+    setCommentsList(() => viewableItems[0].item.comments);
   }, []);
 
   const onCommentsHide = () => {
@@ -94,15 +94,18 @@ const ContentList: React.FC<IProps> = ({ data }) => {
     });
   };
 
+  const listKeyExtractor = useCallback((item) => item.id, []);
+
   return (
     <View style={styles.container}>
       <FlatList
         data={data}
         contentContainerStyle={styles.listContent}
         renderItem={renderListItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={listKeyExtractor}
         initialNumToRender={1}
         maxToRenderPerBatch={1}
+        removeClippedSubviews
         onViewableItemsChanged={onViewableItemsChanged}
         viewabilityConfig={viewConfigRef.current}
         showsVerticalScrollIndicator={false}
